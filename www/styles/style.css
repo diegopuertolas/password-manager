@@ -79,8 +79,6 @@ main {
   height: fit-content;
   margin: 10px;
   border: 1px solid black;
-  border-radius: 5px;
-  
   border-spacing: 0;
   
   font-family: "Roboto", sans-serif;
@@ -88,4 +86,30 @@ main {
 
 thead {
   background-color: rgb(215, 240, 250);
+}
+
+.category {
+  font-family: "Roboto";
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.category-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 12px;
+}
+
+.bin-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+.lucide-trash:hover {
+  color: red;
+  transition: 0.3s;
 }
