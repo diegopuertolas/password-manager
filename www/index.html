@@ -30,7 +30,7 @@
     </div>
 
     <div class="button-container">
-      <button class="button-container__btn">Add categorie</button>
+      <button id="btn-add-category" class="button-container__btn">Add categorie</button>
       <button class="button-container__btn">Add site</button>
     </div>
   </header>
@@ -54,6 +54,17 @@
     </table>
   </main>
 
+  <dialog id="category-dialog" class="dialog">
+    <h2 class="dialog__title">Add Category</h2>
+    <form id="category-form" class="dialog__form">
+      <label for="category-name">Name</label>
+      <input type="text" id="category-name" placeholder="Ex. Social Media">
+      <div class="dialog__buttons">
+        <button type="submit" class="btn-container__btn">Ok</button>
+        <button type="button" id="btn-cancel-category" class="btn-container__btn">Cancel</button>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="./scripts/main.js"></script>
 </body>
