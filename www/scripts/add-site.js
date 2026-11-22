@@ -13,10 +13,15 @@ const passwordInput = document.getElementById('site-password');
 const descriptionInput = document.getElementById('site-description');
 const formError = document.getElementById('form-error');
 const btnCancel = document.getElementById('btn-cancel');
+const btnGeneratePassword = document.getElementById('generate-password-btn');
 
 btnCancel.addEventListener('click', () => {
   window.location.href = 'index.html';
 });
+
+btnGeneratePassword.addEventListener('click', () => {
+  passwordInput.value = generatePassword();
+})
 
 siteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -28,7 +33,8 @@ siteForm.addEventListener('submit', async (e) => {
   const description = descriptionInput.value.trim();
 
   if (!name || !user || !password) {
-    formError.textContent = 'Name, user and password are required.'
+    formError.textContent = 'Name, user and password are required.';
+    return;
   }
 
   const newSite = {
@@ -48,3 +54,22 @@ siteForm.addEventListener('submit', async (e) => {
     console.error(`Error al crear el site: ${error}`);
   }
 })
+
+function generatePassword() {
+  const length = 8;
+  
+  const numbers = '0123456789';
+  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const symbols = '.,;-_!¡?¿()@#$%&*';
+
+  const allChars = numbers + lowerChars + upperChars + symbols;
+  
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * allChars.length);
+    password += allChars[randomIndex];
+  }
+
+  return password;
+}
