@@ -6,6 +6,9 @@ const ul = document.getElementById('categories-list');
 const btnAddCategory = document.getElementById('btn-add-category');
 const categoryDialog = document.getElementById('category-dialog');
 const btnCancelCategory = document.getElementById('btn-cancel-category');
+const categoryForm = document.getElementById('category-form');
+const categoryNameInput = document.getElementById('category-name');
+const categoryError = document.getElementById('category-error');
 
 async function renderCategories() {
   try {
@@ -53,5 +56,25 @@ btnAddCategory.addEventListener('click', () => {
 btnCancelCategory.addEventListener('click', () => {
   categoryDialog.close();
 });
+
+categoryForm.addEventListener('submit', async () => {
+  
+  const name = categoryNameInput.value.trim();
+
+  if (!name) {
+    categoryError.textContent = 'El nombre es obligatorio';
+    return;
+  }
+
+  try {
+    const created = apiService.createCategory(name);
+    if (created) {
+      categoryDialog.close();
+      renderCategories();
+    }
+  } catch (error) {
+    console.error(`Error al crear la categoría: ${error}`);
+  }      
+})
 
 renderCategories();
