@@ -3,6 +3,9 @@ import Api from './api.js'
 const apiService = new Api();
 
 const ul = document.getElementById('categories-list');
+const btnAddCategory = document.getElementById('btn-add-category');
+const categoryDialog = document.getElementById('category-dialog');
+const btnCancelCategory = document.getElementById('btn-cancel-category');
 
 async function renderCategories() {
   try {
@@ -42,5 +45,13 @@ async function handleDeleteCategory(id) {
     console.error(`Error al eliminar la categoría: ${error}`)
   }
 }
+
+btnAddCategory.addEventListener('click', () => {
+  categoryDialog.showModal();
+});
+
+btnCancelCategory.addEventListener('click', () => {
+  categoryDialog.close();
+});
 
 renderCategories();
