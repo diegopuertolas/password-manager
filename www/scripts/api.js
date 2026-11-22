@@ -34,4 +34,11 @@ export default class Api {
     if (!result.ok) return [];
     return result.json();
   }
+
+  async deleteSite(id) {
+    const result = await fetch(`${this.url}/sites/${id}`, {
+      method: 'DELETE'
+    });
+    return result.ok;
+  }
 }

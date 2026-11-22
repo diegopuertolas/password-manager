@@ -11,6 +11,8 @@ const categoryNameInput = document.getElementById('category-name');
 const categoryError = document.getElementById('category-error');
 const sitesList = document.getElementById('sites-list');
 
+let selectedCategoryId = null;
+
 async function renderCategories() {
   try {
     const categories = await apiService.getAllCategories();
@@ -32,6 +34,7 @@ async function renderCategories() {
       `;
 
       li.addEventListener('click', () => {
+        selectedCategoryId = category.id;
         renderSites(category.id);
       })
       
@@ -119,13 +122,25 @@ async function renderSites(categoryId) {
         if (site.url) {
           window.open(site.url, '_blank')
         }
-      })
+      });
+
+      const deleteBtn = tr.querySelector('.btn-delete');
+      deleteBtn.addEventListener('click', () => handleDeleteSite(site.id));
 
       sitesList.appendChild(tr);
     });
 
   } catch (error) {
     console.error(`Error al cargar los sites: ${error}`)
+  }
+}
+
+async function handleDeleteSite(id) {
+  try {
+    const deleted = await apiService.deleteSite(id);
+    if (deleted) renderSites(selectedCategoryId);
+  } catch (erorr) {
+    console.error(`Error al borrar el site: ${site}`)
   }
 }
 
