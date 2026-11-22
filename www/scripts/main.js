@@ -10,6 +10,7 @@ const categoryForm = document.getElementById('category-form');
 const categoryNameInput = document.getElementById('category-name');
 const categoryError = document.getElementById('category-error');
 const sitesList = document.getElementById('sites-list');
+const btnAddSite = document.getElementById('btn-add-site');
 
 let selectedCategoryId = null;
 
@@ -60,6 +61,15 @@ async function handleDeleteCategory(id) {
 btnAddCategory.addEventListener('click', () => {
   categoryDialog.showModal();
 });
+
+btnAddSite.addEventListener('click', () => {
+  if (!selectedCategoryId) {
+    alert('Please, select a category if you want to create a site.')
+    return;
+  }
+  window.location.href = 'add-site.html';
+
+})
 
 btnCancelCategory.addEventListener('click', () => {
   categoryDialog.close();
