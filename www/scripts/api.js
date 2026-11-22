@@ -10,13 +10,13 @@ export default class Api {
     return result.json();
   }
 
-  async createCategory(name) {
+  async createCategory(name, icon) {
     const result = await fetch(`${this.url}/categories`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ name, icon })
     });
 
     return result.ok;

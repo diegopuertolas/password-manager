@@ -11,6 +11,7 @@ const categoryNameInput = document.getElementById('category-name');
 const categoryError = document.getElementById('category-error');
 const sitesList = document.getElementById('sites-list');
 const btnAddSite = document.getElementById('btn-add-site');
+const categoryIconSelect = document.getElementById('category-icon');
 
 let selectedCategoryId = null;
 
@@ -25,9 +26,14 @@ async function renderCategories() {
       const li = document.createElement('li');
       li.className = 'category';
       
+      const icon = category.icon || '📁';
+
       li.innerHTML = `
         <div class="category-container">
-          <span>${category.name}</span>
+          <div class="category-container__info">
+            <span>${icon}</span>
+            <span>${category.name}</span>
+          </div>  
           <button class="bin-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash preview-icon"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </button>  
@@ -78,6 +84,7 @@ btnCancelCategory.addEventListener('click', () => {
 categoryForm.addEventListener('submit', async () => {
   
   const name = categoryNameInput.value.trim();
+  const icon = categoryIconSelect.value;
 
   if (!name) {
     categoryError.textContent = 'El nombre es obligatorio';
@@ -85,7 +92,7 @@ categoryForm.addEventListener('submit', async () => {
   }
 
   try {
-    const created = apiService.createCategory(name);
+    const created = apiService.createCategory(name, icon);
     if (created) {
       categoryDialog.close();
       renderCategories();
