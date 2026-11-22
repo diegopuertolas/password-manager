@@ -35,6 +35,17 @@ export default class Api {
     return result.json();
   }
 
+  async createSite(categoryId, site) {
+    const result = await fetch(`${this.url}/categories/${categoryId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(site)
+    });
+    return result.ok;
+  }
+
   async deleteSite(id) {
     const result = await fetch(`${this.url}/sites/${id}`, {
       method: 'DELETE'

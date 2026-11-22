@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a site</title>
+  <link rel="stylesheet" href="./styles/add-site.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header__title">Pass Server · Add Site</h1>
+  </header>
+
+  <main class="form-main">
+    <form id="site-form" class="site-form">
+      <label for="site-name">Name *</label>
+      <input type="text" id="site-name" placeholder="Ex. Google">
+
+      <label for="site-url">URL</label>
+      <input type="text" id="site-url" placeholder="https://google.com">
+
+      <label for="site-user">User *</label>
+      <input type="text" id="site-user" placeholder="Your user">
+
+      <label for="site-password">Password *</label>
+      <input type="text" id="site-password" placeholder="Your password">
+
+      <label for="site-description">Description</label>
+      <textarea type="text" id="site-description" rows="4" placeholder="Description.."></textarea>
+
+      <p id="form-error" class="error-msg"></p>
+
+      <div class="actions-buttons">
+        <button type="submit" class="actions-buttons__btn">Save</button>
+        <button type="button" id="btn-cancel" class="actions-buttons__btn">Cancel</button>
+      </div>
+    </form>
+  </main>
+
+  <script type="module" src="./scripts/add-site.js"></script>
+</body>
+</html>
