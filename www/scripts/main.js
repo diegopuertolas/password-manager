@@ -65,6 +65,7 @@ async function handleDeleteCategory(id) {
 }
 
 btnAddCategory.addEventListener('click', () => {
+  categoryNameInput.classList.remove('input-error');
   categoryDialog.showModal();
 });
 
@@ -86,11 +87,8 @@ categoryForm.addEventListener('submit', async () => {
   const name = categoryNameInput.value.trim();
   const icon = categoryIconSelect.value;
 
-  if (!name) {
-    categoryError.textContent = 'El nombre es obligatorio';
-    return;
-  }
-
+  if (!validateCategoryName()) return;
+  
   try {
     const created = apiService.createCategory(name, icon);
     if (created) {
@@ -160,5 +158,21 @@ async function handleDeleteSite(id) {
     console.error(`Error al borrar el site: ${site}`)
   }
 }
+
+function validateCategoryName() {
+  const name = categoryNameInput.value.trim();
+
+  if (name.length < 3) {
+    categoryNameInput.classList.add('input-error');
+    categoryError.textContent = 'The name must be at least 3 characters long.';
+    return false;
+  }
+
+  categoryNameInput.classList.remove('input-error');
+  categoryError.textContent = '';
+  return true;
+}
+
+categoryNameInput.addEventListener('blur', validateCategoryName);
 
 renderCategories();
