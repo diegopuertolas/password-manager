@@ -41,3 +41,8 @@
   gap: 10px;
   margin-top: 10px;
 }
+
+.generate-password-btn {
+  background: none;
+  border: none;
+}
