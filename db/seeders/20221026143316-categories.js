@@ -4,7 +4,7 @@ const { faker } = require('@faker-js/faker');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -14,18 +14,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   let categories = Array(10).fill(0).map( (v,idx) => ({
-    // id: idx,
-    name: faker.company.bsNoun(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-   }))
+
+    const icons = ['📁', '🌐', '💼', '🏦', '🎮', '🛒'];
+
+    let categories = Array(10).fill(0).map((v, idx) => ({
+      // id: idx,
+      name: faker.company.bsNoun(),
+      icon: icons[Math.floor(Math.random() * icons.length)],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }))
 
 
-   await queryInterface.bulkInsert('Categories', categories)
+    await queryInterface.bulkInsert('Categories', categories)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
