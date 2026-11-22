@@ -9,4 +9,11 @@ export default class Api {
     if (!result.ok) return [];
     return result.json();
   }
+
+  async deleteCategory(id) {
+    const result = await fetch(`${this.url}/categories/${id}`, {
+      method: 'DELETE'
+    });
+    return result.ok;
+  }
 }
