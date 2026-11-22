@@ -38,7 +38,7 @@ export default class Api {
   async createSite(categoryId, site) {
     const result = await fetch(`${this.url}/categories/${categoryId}`, {
       method: 'POST',
-      header: {
+      headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(site)
