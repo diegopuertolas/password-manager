@@ -100,11 +100,13 @@ async function renderSites(categoryId) {
 
     sites.forEach(site => {
       const tr = document.createElement('tr');
+
+      const date = new Date(site.createdAt).toLocaleDateString('es-ES');
       
       tr.innerHTML = `
         <td>${site.name}</td>
         <td>${site.user}</td>
-        <td>${site.createdAt}</td>
+        <td>${date}</td>
         <td class="actions-cell">
           <button class="action-btn btn-open"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-ban preview-icon"><path d="M12 22a14.48 14.48 0 01-4.008-10C7.993 9.136 9 5.258 11 2.05A10 10 0 0012 22"/><path d="m15.172 3.172 5.656 5.656"/><path d="M15.86 14a14.5 14.5 0 01-3.859 8 10 10 0 009.949-9"/><path d="M2 12h10.5"/><circle cx="18" cy="6" r="4"/></svg></button>
           <button class="action-btn btn-delete"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash preview-icon"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
