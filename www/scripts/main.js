@@ -67,7 +67,7 @@ btnAddSite.addEventListener('click', () => {
     alert('Please, select a category if you want to create a site.')
     return;
   }
-  window.location.href = 'add-site.html';
+  window.location.href = `add-site.html?categoryId=${selectedCategoryId}`;
 
 })
 
