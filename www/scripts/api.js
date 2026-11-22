@@ -10,6 +10,18 @@ export default class Api {
     return result.json();
   }
 
+  async createCategory(name) {
+    const result = await fetch(`${this.url}/categories`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name })
+    });
+
+    return result.ok;
+  }
+
   async deleteCategory(id) {
     const result = await fetch(`${this.url}/categories/${id}`, {
       method: 'DELETE'
