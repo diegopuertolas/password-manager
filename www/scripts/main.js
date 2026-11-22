@@ -7,7 +7,9 @@ const ul = document.getElementById('categories-list');
 async function renderCategories() {
   try {
     const categories = await apiService.getAllCategories();
-        
+
+    ul.innerHTML = '';
+    
     categories.forEach(category => {
       
       const li = document.createElement('li');
