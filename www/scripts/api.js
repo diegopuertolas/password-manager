@@ -11,7 +11,7 @@ export default class Api {
   }
 
   async createCategory(name) {
-    const result = await fetch(`${this.url}/categores`, {
+    const result = await fetch(`${this.url}/categories`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
