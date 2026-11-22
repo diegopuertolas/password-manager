@@ -15,12 +15,14 @@
     <form id="site-form" class="site-form">
       <label for="site-name">Name *</label>
       <input type="text" id="site-name" placeholder="Ex. Google">
+      <p id="name-error" class="error-msg"></p>
 
       <label for="site-url">URL</label>
       <input type="text" id="site-url" placeholder="https://google.com">
 
       <label for="site-user">User *</label>
       <input type="text" id="site-user" placeholder="Your user">
+      <p id="user-error" class="error-msg"></p>
 
       <div>
         <label for="site-password">Password *</label>
@@ -29,11 +31,10 @@
         </button>
       </div>
       <input type="text" id="site-password" placeholder="Your password">
+      <p id="password-error" class="error-msg"></p>
 
       <label for="site-description">Description</label>
       <textarea type="text" id="site-description" rows="4" placeholder="Description.."></textarea>
-
-      <p id="form-error" class="error-msg"></p>
 
       <div class="actions-buttons">
         <button type="submit" class="actions-buttons__btn">Save</button>
