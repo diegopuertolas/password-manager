@@ -28,4 +28,10 @@ export default class Api {
     });
     return result.ok;
   }
+
+  async getSites(id) {
+    const result = await fetch(`${this.url}/categories/${id}`);
+    if (!result.ok) return [];
+    return result.json();
+  }
 }
