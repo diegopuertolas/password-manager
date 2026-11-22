@@ -14,6 +14,10 @@ const descriptionInput = document.getElementById('site-description');
 const formError = document.getElementById('form-error');
 const btnCancel = document.getElementById('btn-cancel');
 const btnGeneratePassword = document.getElementById('generate-password-btn');
+const nameError = document.getElementById('name-error');
+const userError = document.getElementById('user-error');
+const passwordError = document.getElementById('password-error');
+
 
 btnCancel.addEventListener('click', () => {
   window.location.href = 'index.html';
@@ -21,6 +25,7 @@ btnCancel.addEventListener('click', () => {
 
 btnGeneratePassword.addEventListener('click', () => {
   passwordInput.value = generatePassword();
+  validateField(passwordInput, passwordError, 8, 'The password must be at least 8 characters long.')
 })
 
 siteForm.addEventListener('submit', async (e) => {
@@ -32,10 +37,11 @@ siteForm.addEventListener('submit', async (e) => {
   const password = passwordInput.value.trim();
   const description = descriptionInput.value.trim();
 
-  if (!name || !user || !password) {
-    formError.textContent = 'Name, user and password are required.';
-    return;
-  }
+  const isNameValid = validateField(nameInput, nameError, 3, 'The name must be at least 3 characters long.');
+  const isUserValid = validateField(userInput, userError, 3, 'The user must be at least 3 characters long.');
+  const isPassValid = validateField(passwordInput, passwordError, 8, 'The password must be at least 3 characters long.');
+
+  if (!isNameValid || !isUserValid || !isPassValid) return;
 
   const newSite = {
     name, 
@@ -73,3 +79,29 @@ function generatePassword() {
 
   return password;
 }
+
+function validateField(input, errorEl, minLength, message) {
+  const value = input.value.trim();
+
+  if (value.length < minLength) {
+    input.classList.add('input-error');
+    errorEl.textContent = message;
+    return false;
+  }
+
+  input.classList.remove('input-error');
+  errorEl.textContent = '';
+  return true;
+}
+
+nameInput.addEventListener('blur', () => {
+  validateField(nameInput, nameError, 3, 'The name must be at least 3 characters long.');
+});
+
+userInput.addEventListener('blur', () => {
+  validateField(userInput, userError, 3, 'The user must be at least 3 characters long.');
+});
+
+passwordError.addEventListener('blur', () => {
+  validateField(passwordInput, passwordError, 8, 'The password must be at least 3 characters long.');
+})
