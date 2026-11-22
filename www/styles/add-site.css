@@ -46,3 +46,8 @@
   background: none;
   border: none;
 }
+
+.input-error {
+  border: 2px solid red !important;
+  background-color: #ffe6e6;
+}
