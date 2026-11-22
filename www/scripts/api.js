@@ -31,7 +31,7 @@ export default class Api {
 
   async getSites(id) {
     const result = await fetch(`${this.url}/categories/${id}`);
-    if (result.ok) return [];
+    if (!result.ok) return [];
     return result.json();
   }
 }
