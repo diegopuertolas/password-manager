@@ -1,4 +1,4 @@
-import Api from './api.js'
+import Api from './api.js';
 
 const apiService = new Api();
 
@@ -35,7 +35,7 @@ async function renderCategories() {
             <span>${category.name}</span>
           </div>  
           <button class="bin-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash preview-icon"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <img src="../assets/bin-icon.svg" alt="Icono de borrar site" class="action-btn btn-delete" width="17px" height="17px">
           </button>  
         </div>
       `;
@@ -126,9 +126,9 @@ async function renderSites(categoryId) {
         <td>${site.user}</td>
         <td>${date}</td>
         <td class="actions-cell">
-          <button class="action-btn btn-open"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-ban preview-icon"><path d="M12 22a14.48 14.48 0 01-4.008-10C7.993 9.136 9 5.258 11 2.05A10 10 0 0012 22"/><path d="m15.172 3.172 5.656 5.656"/><path d="M15.86 14a14.5 14.5 0 01-3.859 8 10 10 0 009.949-9"/><path d="M2 12h10.5"/><circle cx="18" cy="6" r="4"/></svg></button>
-          <button class="action-btn btn-delete"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash preview-icon"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-          <button class="action-btn btn-edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line preview-icon"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></button>
+          <img src="../assets/web-icon.svg" alt="Icono de ir a la web" class="action-btn btn-open">
+          <img src="../assets/bin-icon.svg" alt="Icono de borrar site" class="action-btn btn-delete">
+          <img src="../assets/edit-icon.svg" alt="Icono de editar site" class="action-btn btn-edit">
         </td>      
       `;
 
