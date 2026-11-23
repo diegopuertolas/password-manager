@@ -99,7 +99,7 @@ categoryForm.addEventListener('submit', async () => {
   if (!validateCategoryName()) return;
   
   try {
-    const created = apiService.createCategory(name, icon);
+    const created = await apiService.createCategory(name, icon);
     if (created) {
       categoryDialog.close();
       renderCategories();
