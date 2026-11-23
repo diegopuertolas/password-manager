@@ -28,6 +28,25 @@ btnGeneratePassword.addEventListener('click', () => {
   validateField(passwordInput, passwordError, 8, 'The password must be at least 8 characters long.')
 })
 
+function generatePassword() {
+  const length = 8;
+  
+  const numbers = '0123456789';
+  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const symbols = '.,;-_!¡?¿()@#$%&*';
+
+  const allChars = numbers + lowerChars + upperChars + symbols;
+  
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * allChars.length);
+    password += allChars[randomIndex];
+  }
+
+  return password;
+}
+
 siteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -60,25 +79,6 @@ siteForm.addEventListener('submit', async (e) => {
     console.error(`Error al crear el site: ${error}`);
   }
 })
-
-function generatePassword() {
-  const length = 8;
-  
-  const numbers = '0123456789';
-  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
-  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const symbols = '.,;-_!¡?¿()@#$%&*';
-
-  const allChars = numbers + lowerChars + upperChars + symbols;
-  
-  let password = '';
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * allChars.length);
-    password += allChars[randomIndex];
-  }
-
-  return password;
-}
 
 function validateField(input, errorEl, minLength, message) {
   const value = input.value.trim();
