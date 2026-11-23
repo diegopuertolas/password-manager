@@ -11,7 +11,6 @@ const urlInput = document.getElementById('site-url');
 const userInput = document.getElementById('site-user');
 const passwordInput = document.getElementById('site-password');
 const descriptionInput = document.getElementById('site-description');
-const formError = document.getElementById('form-error');
 const btnCancel = document.getElementById('btn-cancel');
 const btnGeneratePassword = document.getElementById('generate-password-btn');
 const nameError = document.getElementById('name-error');
@@ -104,4 +103,4 @@ userInput.addEventListener('blur', () => {
 
 passwordError.addEventListener('blur', () => {
   validateField(passwordInput, passwordError, 8, 'The password must be at least 3 characters long.');
-})
+});
