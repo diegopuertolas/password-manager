@@ -16,6 +16,8 @@ const btnGeneratePassword = document.getElementById('generate-password-btn');
 const nameError = document.getElementById('name-error');
 const userError = document.getElementById('user-error');
 const passwordError = document.getElementById('password-error');
+const btnTogglePassword = document.getElementById('toggle-password-btn');
+const togglePasswordIcon = document.getElementById('toggle-password-icon');
 
 
 btnCancel.addEventListener('click', () => {
@@ -25,7 +27,16 @@ btnCancel.addEventListener('click', () => {
 btnGeneratePassword.addEventListener('click', () => {
   passwordInput.value = generatePassword();
   validateField(passwordInput, passwordError, 8, 'The password must be at least 8 characters long.')
-})
+});
+
+btnTogglePassword.addEventListener('click', () => {
+  const isHidden = passwordInput.type === 'password';
+
+  passwordInput.type = isHidden ? 'text' : 'password';
+
+  togglePasswordIcon.src = isHidden ? './assets/eye-disable.svg' : './assets/eye.svg';
+  togglePasswordIcon.alt = isHidden ? 'Hide Password' : 'Show Password';
+});
 
 function generatePassword() {
   const length = 8;
