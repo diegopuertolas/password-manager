@@ -14,6 +14,7 @@ const btnAddSite = document.getElementById('btn-add-site');
 const categoryIconSelect = document.getElementById('category-icon');
 
 let selectedCategoryId = null;
+let selectedCategoryName = '';
 
 async function renderCategories() {
   try {
@@ -51,6 +52,7 @@ async function renderCategories() {
         li.classList.add('category--active');
 
         selectedCategoryId = category.id;
+        selectedCategoryName = category.name;
         renderSites(category.id);
       })
       
@@ -103,7 +105,12 @@ btnAddSite.addEventListener('click', () => {
     alert('Please, select a category if you want to create a site.')
     return;
   }
-  window.location.href = `add-site.html?categoryId=${selectedCategoryId}`;
+
+  const params = new URLSearchParams({
+    categoryId: selectedCategoryId,
+    categoryName: selectedCategoryName
+  })
+  window.location.href = `add-site.html?${params.toString()}`;
 })
 
 btnCancelCategory.addEventListener('click', () => {

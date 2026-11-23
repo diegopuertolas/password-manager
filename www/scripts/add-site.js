@@ -4,6 +4,7 @@ const apiService = new Api();
 
 const params = new URLSearchParams(window.location.search);
 const categoryId = params.get('categoryId');
+const categoryName = params.get('categoryName');
 
 const siteForm = document.getElementById('site-form');
 const nameInput = document.getElementById('site-name');
@@ -18,7 +19,15 @@ const userError = document.getElementById('user-error');
 const passwordError = document.getElementById('password-error');
 const btnTogglePassword = document.getElementById('toggle-password-btn');
 const togglePasswordIcon = document.getElementById('toggle-password-icon');
+const addSiteTitle = document.getElementById('add-site-title');
 
+if (!categoryId) {
+  window.location.href = 'index.html';
+}
+
+if (categoryName) {
+  addSiteTitle.textContent = `Pass Saver · Añadiendo site a ${categoryName}`
+}
 
 btnCancel.addEventListener('click', () => {
   window.location.href = 'index.html';
