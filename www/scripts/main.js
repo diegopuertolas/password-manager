@@ -118,12 +118,13 @@ async function renderSites(categoryId) {
 
     sites.forEach(site => {
       const tr = document.createElement('tr');
-
       const date = new Date(site.createdAt).toLocaleDateString('es-ES');
+      const hiddenPassword = '*'.repeat(site.password.length);
       
       tr.innerHTML = `
         <td>${site.name}</td>
         <td>${site.user}</td>
+        <td class="password-cell">${hiddenPassword}</td>
         <td>${date}</td>
         <td class="actions-cell">
           <img src="../assets/web-icon.svg" alt="Icono de ir a la web" class="action-btn btn-open">
@@ -131,6 +132,14 @@ async function renderSites(categoryId) {
           <img src="../assets/edit-icon.svg" alt="Icono de editar site" class="action-btn btn-edit">
         </td>      
       `;
+
+      const passwordCell = tr.querySelector('.password-cell');
+      let isPasswordVisible = false; 
+      
+      passwordCell.addEventListener('click', () => {
+        isPasswordVisible = !isPasswordVisible;
+        passwordCell.textContent = isPasswordVisible ? site.password : hiddenPassword;
+      })
 
       const openUrlBtn = tr.querySelector('.btn-open');
       openUrlBtn.addEventListener('click', () => {
