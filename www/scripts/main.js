@@ -25,8 +25,12 @@ async function renderCategories() {
       
       const li = document.createElement('li');
       li.className = 'category';
-      
+
       const icon = category.icon || '📁';
+
+      if (category.id === selectedCategoryId) {
+        li.classList.add('category--active');
+      }
 
       li.innerHTML = `
         <div class="category-container">
@@ -41,6 +45,11 @@ async function renderCategories() {
       `;
 
       li.addEventListener('click', () => {
+        const currentActive = ul.querySelector('.category--active');
+        if (currentActive) currentActive.classList.remove('category--active');
+        
+        li.classList.add('category--active');
+
         selectedCategoryId = category.id;
         renderSites(category.id);
       })
