@@ -91,8 +91,9 @@ btnCancelCategory.addEventListener('click', () => {
   categoryDialog.close();
 });
 
-categoryForm.addEventListener('submit', async () => {
-  
+categoryForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
   const name = categoryNameInput.value.trim();
   const icon = categoryIconSelect.value;
 
