@@ -11,7 +11,6 @@ const urlInput = document.getElementById('site-url');
 const userInput = document.getElementById('site-user');
 const passwordInput = document.getElementById('site-password');
 const descriptionInput = document.getElementById('site-description');
-const formError = document.getElementById('form-error');
 const btnCancel = document.getElementById('btn-cancel');
 const btnGeneratePassword = document.getElementById('generate-password-btn');
 const nameError = document.getElementById('name-error');
@@ -27,6 +26,25 @@ btnGeneratePassword.addEventListener('click', () => {
   passwordInput.value = generatePassword();
   validateField(passwordInput, passwordError, 8, 'The password must be at least 8 characters long.')
 })
+
+function generatePassword() {
+  const length = 8;
+  
+  const numbers = '0123456789';
+  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const symbols = '.,;-_!¡?¿()@#$%&*';
+
+  const allChars = numbers + lowerChars + upperChars + symbols;
+  
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * allChars.length);
+    password += allChars[randomIndex];
+  }
+
+  return password;
+}
 
 siteForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -61,25 +79,6 @@ siteForm.addEventListener('submit', async (e) => {
   }
 })
 
-function generatePassword() {
-  const length = 8;
-  
-  const numbers = '0123456789';
-  const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
-  const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const symbols = '.,;-_!¡?¿()@#$%&*';
-
-  const allChars = numbers + lowerChars + upperChars + symbols;
-  
-  let password = '';
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * allChars.length);
-    password += allChars[randomIndex];
-  }
-
-  return password;
-}
-
 function validateField(input, errorEl, minLength, message) {
   const value = input.value.trim();
 
@@ -104,4 +103,4 @@ userInput.addEventListener('blur', () => {
 
 passwordError.addEventListener('blur', () => {
   validateField(passwordInput, passwordError, 8, 'The password must be at least 3 characters long.');
-})
+});

@@ -25,8 +25,12 @@ async function renderCategories() {
       
       const li = document.createElement('li');
       li.className = 'category';
-      
+
       const icon = category.icon || '📁';
+
+      if (category.id === selectedCategoryId) {
+        li.classList.add('category--active');
+      }
 
       li.innerHTML = `
         <div class="category-container">
@@ -41,6 +45,11 @@ async function renderCategories() {
       `;
 
       li.addEventListener('click', () => {
+        const currentActive = ul.querySelector('.category--active');
+        if (currentActive) currentActive.classList.remove('category--active');
+        
+        li.classList.add('category--active');
+
         selectedCategoryId = category.id;
         renderSites(category.id);
       })
@@ -75,22 +84,22 @@ btnAddSite.addEventListener('click', () => {
     return;
   }
   window.location.href = `add-site.html?categoryId=${selectedCategoryId}`;
-
 })
 
 btnCancelCategory.addEventListener('click', () => {
   categoryDialog.close();
 });
 
-categoryForm.addEventListener('submit', async () => {
-  
+categoryForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
   const name = categoryNameInput.value.trim();
   const icon = categoryIconSelect.value;
 
   if (!validateCategoryName()) return;
   
   try {
-    const created = apiService.createCategory(name, icon);
+    const created = await apiService.createCategory(name, icon);
     if (created) {
       categoryDialog.close();
       renderCategories();
@@ -118,12 +127,13 @@ async function renderSites(categoryId) {
 
     sites.forEach(site => {
       const tr = document.createElement('tr');
-
       const date = new Date(site.createdAt).toLocaleDateString('es-ES');
+      const hiddenPassword = '*'.repeat(site.password.length);
       
       tr.innerHTML = `
         <td>${site.name}</td>
         <td>${site.user}</td>
+        <td class="password-cell">${hiddenPassword}</td>
         <td>${date}</td>
         <td class="actions-cell">
           <img src="../assets/web-icon.svg" alt="Icono de ir a la web" class="action-btn btn-open">
@@ -131,6 +141,14 @@ async function renderSites(categoryId) {
           <img src="../assets/edit-icon.svg" alt="Icono de editar site" class="action-btn btn-edit">
         </td>      
       `;
+
+      const passwordCell = tr.querySelector('.password-cell');
+      let isPasswordVisible = false; 
+      
+      passwordCell.addEventListener('click', () => {
+        isPasswordVisible = !isPasswordVisible;
+        passwordCell.textContent = isPasswordVisible ? site.password : hiddenPassword;
+      })
 
       const openUrlBtn = tr.querySelector('.btn-open');
       openUrlBtn.addEventListener('click', () => {
