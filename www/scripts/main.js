@@ -55,7 +55,7 @@ async function renderCategories() {
       })
       
       const deleteBtn = li.querySelector('.bin-icon');
-      deleteBtn.addEventListener('click', () => handleDeleteCategory(category.id));
+      deleteBtn.addEventListener('click', () => handleDeleteCategory(category.id, category.name));
 
       ul.appendChild(li);
     });
@@ -64,10 +64,30 @@ async function renderCategories() {
   }
 }
 
-async function handleDeleteCategory(id) {
+async function confirmDelete(itemName) {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: `${itemName} will be eliminated.`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'red',
+    confirmButtonText: 'Delete',
+    cancelButtonText: 'Cancel'
+  });
+  return result.isConfirmed;
+}
+
+async function handleDeleteCategory(id, name) {
+  const confirmed = await confirmDelete(name);
+  if (!confirmed) return;
   try {
     const deleted = await apiService.deleteCategory(id);
-    if (deleted) renderCategories();
+    if (deleted) {
+      if (selectedCategoryId === id) {
+        selectedCategoryId = null;
+      }
+      renderCategories();
+    }
   } catch (error) {
     console.error(`Error al eliminar la categoría: ${error}`)
   }
@@ -158,7 +178,7 @@ async function renderSites(categoryId) {
       });
 
       const deleteBtn = tr.querySelector('.btn-delete');
-      deleteBtn.addEventListener('click', () => handleDeleteSite(site.id));
+      deleteBtn.addEventListener('click', () => handleDeleteSite(site.id, site.name));
 
       sitesList.appendChild(tr);
     });
@@ -168,7 +188,9 @@ async function renderSites(categoryId) {
   }
 }
 
-async function handleDeleteSite(id) {
+async function handleDeleteSite(id, name) {
+  const confirmed = await confirmDelete(name)
+  if (!confirmed) return;
   try {
     const deleted = await apiService.deleteSite(id);
     if (deleted) renderSites(selectedCategoryId);
