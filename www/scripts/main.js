@@ -84,7 +84,6 @@ btnAddSite.addEventListener('click', () => {
     return;
   }
   window.location.href = `add-site.html?categoryId=${selectedCategoryId}`;
-
 })
 
 btnCancelCategory.addEventListener('click', () => {
