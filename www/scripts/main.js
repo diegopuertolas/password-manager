@@ -15,6 +15,7 @@ const categoryIconSelect = document.getElementById('category-icon');
 
 let selectedCategoryId = null;
 let selectedCategoryName = '';
+let isDeleting = false;
 
 async function renderCategories() {
   try {
@@ -80,6 +81,9 @@ async function confirmDelete(itemName) {
 }
 
 async function handleDeleteCategory(id, name) {
+  if (isDeleting) return;
+  isDeleting = true;
+
   const confirmed = await confirmDelete(name);
   if (!confirmed) return;
   try {
@@ -92,6 +96,8 @@ async function handleDeleteCategory(id, name) {
     }
   } catch (error) {
     console.error(`Error al eliminar la categoría: ${error}`)
+  } finally {
+    isDeleting = false;
   }
 }
 
@@ -196,6 +202,9 @@ async function renderSites(categoryId) {
 }
 
 async function handleDeleteSite(id, name) {
+  if (isDeleting) return;
+  isDeleting = true;
+  
   const confirmed = await confirmDelete(name)
   if (!confirmed) return;
   try {
@@ -203,6 +212,8 @@ async function handleDeleteSite(id, name) {
     if (deleted) renderSites(selectedCategoryId);
   } catch (erorr) {
     console.error(`Error al borrar el site: ${site}`)
+  } finally {
+    isDeleting = false;
   }
 }
 
